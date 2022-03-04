@@ -1,0 +1,42 @@
+resources:
+  - ../../base/generic
+
+# Add a prefix to all queue manager artefacts, use a different namespace for each instance of the same queue manager i.e. dev, prd.
+namePrefix: qm022-
+
+patchesStrategicMerge:
+  - ./qm.yaml
+
+# Alternative mechanism for patching
+patches:
+  - target:
+      group: mq.ibm.com
+      kind: QueueManager
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: uatqm011
+
+generatorOptions:
+ disableNameSuffixHash: true
+# Create a configMap that will be used with a volume that is dynamically updated.
+configMapGenerator:
+- name: dynamic-mqsc-configmap
+  behavior: create
+  files:
+  - dynamic.mqsc
+- name: static-mqsc-configmap
+  behavior: create
+  files:
+    - static-qm.mqsc
+
+generatorOptions:
+ disableNameSuffixHash: true
+secretGenerator:
+  - name: cert
+    behavior: create
+    files:
+      - certs/tls.crt
+      - certs/tls.key
+    type: kubernetes.io/tls
+

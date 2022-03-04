@@ -1,0 +1,52 @@
+apiVersion: mq.ibm.com/v1beta1
+kind: QueueManager
+metadata:
+  name: generic-qm
+spec:
+  queueManager:
+    name: DQM011
+    mqsc:
+      - configMap:
+          name: qm011-static-mqsc-configmap
+          items:
+            - static-qm.mqsc
+    availability:
+      type: NativeHA
+    storage:
+      defaultClass: ibmc-block-gold
+      persistedData:
+        class: ibmc-block-gold
+        deleteClaim: true
+        enabled: true
+        type: persistent-claim
+      queueManager:
+        class: ibmc-block-gold
+        deleteClaim: true
+        type: persistent-claim
+      recoveryLogs:
+        class: ibmc-block-gold
+        deleteClaim: true
+        enabled: true
+        type: persistent-claim
+  pki:
+    keys:
+      - name: certificate
+        secret:
+          items:
+            - tls.key
+            - tls.crt
+          secretName: qm011-cert
+  template:
+    pod:
+      volumes:
+        - name: config-volume-scripts
+          configMap:
+            name: qm011-scripts-configmap
+            defaultMode: 0777
+        - name: dynamic-config-volume-mqsc
+          configMap:
+            name: qm011-dynamic-mqsc-configmap
+            defaultMode: 0777
+
+  web:
+    enabled: true

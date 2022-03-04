@@ -1,0 +1,22 @@
+resources:
+  - ../../pte/qm02
+
+# patchesStrategicMerge:
+#   - ./qm.yaml
+
+# Alternative mechanism for patching
+patches:
+  - target:
+      group: mq.ibm.com
+      kind: QueueManager
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: prdqm022
+
+# # Add envirnoment specific static MQSC such as channels and XMIT queues
+# configMapGenerator:
+#   - name: mqsc-configmap
+#     behavior: merge
+#     files:
+#       - static-qm-prd.mqsc

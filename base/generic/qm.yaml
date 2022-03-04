@@ -1,0 +1,35 @@
+apiVersion: mq.ibm.com/v1beta1
+kind: QueueManager
+metadata:
+  name: generic-qm
+spec:
+  license:
+    accept: true
+    license: L-RJON-C7QG3S
+    use: NonProduction
+  version: 9.2.4.0-r1
+
+  queueManager:
+    name: GENERIC
+    image: cp.icr.io/cp/ibm-mqadvanced-server-integration:9.2.4.0-r1
+    resources:
+      limits:
+        cpu: 500m
+        memory: 1Gi
+      requests:
+        cpu: 500m
+        memory: 1Gi
+    storage:
+      queueManager:
+        type: ephemeral
+  template:
+    pod:
+      containers:
+        - name: qmgr
+          volumeMounts:
+            - name: config-volume-scripts
+              mountPath: /mq-config
+              readOnly: true
+            - name: dynamic-config-volume-mqsc
+              mountPath: /dyn-mq-config-mqsc
+              readOnly: true

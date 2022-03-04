@@ -1,0 +1,7 @@
+resources:
+  - ./qm.yaml
+
+# Add the scripts required for dynamic updates via an MQ service.
+components:
+  - ../../components/scripts
+
