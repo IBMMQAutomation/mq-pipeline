@@ -23,9 +23,9 @@ We have three repositories for MQ pipeline:
 3. Curent GitOps [repository](https://github.com/IBMMQAutomation/mq-pipeline.git) for ArgoCD
    - Access: Admins only
 
-# CI/CD Implementation
+# Steps
 
-0. [Prerequisites](##Prerequisites)
+0. [Prerequisites](#prerequisites)
 1. [Build MQ base image](#MQ-Base-Image)
    - Create Tekton pipeline to build, scan and push custom base image to your nexus/ocp/private registry (In this demo, we will build and push an image to openshift registry however you can change those tekton tasks to add scan and push to your private registry)
 2. [Dynamic MQSC](#Dynamic-MQSC-Tekton-Task)
