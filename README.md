@@ -1,14 +1,14 @@
 # MQ Gitops
 
-# Architecture
+## Overview
 
-![Custom Image Pipeline](/readme-images/custom-image.png)
+![Custom Image Pipeline](/readme-images/custom-image.png){:height="25%" width="25%"}
 
-![Dynamic MQSC Pipeline](/readme-images/dynamic-mqsc-pipeline.png)
+![Dynamic MQSC Pipeline](/readme-images/dynamic-mqsc-pipeline.png){:height="25%" width="25%"}
 
-![ArgoCD deployment](/readme-images/argocd-app.png)
+![ArgoCD deployment](/readme-images/argocd-app.png){:height="25%" width="25%"}
 
-![different-envs](/readme-images/different-envs.png)
+![different-envs](/readme-images/different-envs.png){:height="25%" width="25%"}
 
 ## Git Repository Setup
 
@@ -23,12 +23,15 @@ We have three repositories for MQ pipeline:
 3. Curent GitOps [repository](https://github.com/IBMMQAutomation/mq-pipeline.git) for ArgoCD
    - Access: Admins only
 
-## CI/CD Setup
+# CI/CD Implementation
 
-1. [Build MQ base image using Tekton](#MQ-Base-Image)
-   - Build, Scan and Push base image to nexus repository
-2. [Tekton to push MQSC changes from Dynamic MQSC repo to ArgoCD repo](#Dynamic-MQSC-Tekton-Task)
-3. [ArgoCD setup to watch GitOps repository](#GitOps-with-ArgoCD)
+0. [Prerequisites](##Prerequisites)
+1. [Build MQ base image](#MQ-Base-Image)
+   - Create Tekton pipeline to build, scan and push custom base image to your nexus/ocp/private registry (In this demo, we will build and push an image to openshift registry however you can change those tekton tasks to add scan and push to your private registry)
+2. [Dynamic MQSC](#Dynamic-MQSC-Tekton-Task)
+   - Create Tekton pipeline to push MQSC changes from Dynamic MQSC repo to ArgoCD repo
+3. [Gitops setup](#GitOps-with-ArgoCD)
+   - Create ArgoCD app to watch for git changes and apply yamls to your cluster
 
 ## **Prerequisites**
 
@@ -109,6 +112,8 @@ Already have an Openshift cluster with the following operators:
 ## Dynamic MQSC Tekton Task
 
 #### **Purpose of Dynamic MQSC repository is for your development team to create PR for changes to MQSC. Once the PR is approved, tekton pipeline is triggered to copy the changes to GitOps repostiory**
+
+- Make sure prerequisites are met
 
 - Git clone and copy it to your Github/BitBucket
   ```
