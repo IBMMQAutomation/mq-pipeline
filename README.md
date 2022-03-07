@@ -52,11 +52,26 @@ Already have an Openshift cluster with the following operators:
   - To create `git-credentials`
 
     ```
-    oc create secret generic git-credentials \
-    --from-literal=username=<username> \
-    --from-literal=password=<personal-access-token> \
-    --type=kubernetes.io/basic-auth \
-    --namespace=<namespace>
+    touch git-credentials.yaml
+    ```
+
+    Add the follwoing content to `git-credentials.yaml` after changing annotations, username and password
+
+    ```
+    apiVersion: v1
+    kind: Secret
+    metadata:
+    name: gitsecret
+    annotations:
+        build.openshift.io/source-secret-match-uri-1: https://github.ibm.com #change this to yor enterprise github or use simply use https://github.com for public github repo
+    type: kubernetes.io/basic-auth
+    stringData:
+    username: yourid@ibm.com
+    password: <token>
+    ```
+
+    ```
+    oc apply -f git-credentials.yaml
     ```
 
 ## MQ Base Image
