@@ -14,7 +14,7 @@
 
 We have three repositories for MQ pipeline:
 
-1. [Base MQ image repository](https://github.com/IBMMQAutomation/base-image) for MQ base image for every MQ release
+1. [Base MQ image repository](https://github.com/IBMMQAutomation/base-image) to build MQ custom base image for every MQ release/fix pack
    - Access: Admins only
 2. [Dynamic MQSC repository](https://github.com/IBMMQAutomation/dynamic-mqsc) for MQSC Changes.
    - Access:
