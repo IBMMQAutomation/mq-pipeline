@@ -1,5 +1,3 @@
-# MQ Gitops
-
 ## Overview
 
 ![Custom Image Pipeline](/readme-images/custom-image.png){height="10%" width="25%"}
