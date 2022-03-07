@@ -58,7 +58,7 @@ Already have an Openshift cluster with the following operators:
     touch git-credentials.yaml
     ```
 
-    Add the follwoing content to `git-credentials.yaml` after changing annotations, username and password
+    Add the following content to `git-credentials.yaml` after changing annotations, username and password
 
     ```
     apiVersion: v1
@@ -100,7 +100,7 @@ Already have an Openshift cluster with the following operators:
   ```
 
 - Apply Tekton pipeline and tasks to build and push custom image
-  - Note: You can easily add scan task to scan base image before pushing the base image to your nexus/other registry
+  - Note: You can easily add scan task to scan base image before pushing the base image to your nexus/private registry
     ```
     cd base-iamge
     oc apply -f tekton/pipeline
@@ -140,7 +140,7 @@ Already have an Openshift cluster with the following operators:
 - Create ArgoCD Application
   - Note: Before creating ArgoCD, please contact cluster admin to give ArgoCD permission to create resources in your namespace using Cluster Role and Cluster Role Binding as well as private git repository
 
-#### Go to your ArgoCD instance. On top left, click `New App` and fill out necessary information such as:
+#### Go to your ArgoCD instance. On top left, click `New App` and fill out necessary values such as:
 
 - To deploy `QM01` for `DEV` environment
   - Application Name: `dev-qm01` (ArgoCD app name)
