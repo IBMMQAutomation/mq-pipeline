@@ -14,13 +14,13 @@
 
 We have three repositories for MQ pipeline:
 
-1. [Base MQ image repository](https://github.com/IBMMQAutomation/base-image) to build MQ custom base image for every MQ release/fix pack
+1. Base MQ image [repository](https://github.com/IBMMQAutomation/base-image) to build MQ custom base image for every MQ release/fix pack
    - Access: Admins only
-2. [Dynamic MQSC repository](https://github.com/IBMMQAutomation/dynamic-mqsc) for MQSC Changes.
+2. Dynamic MQSC [repository](https://github.com/IBMMQAutomation/dynamic-mqsc) for MQSC Changes.
    - Access:
      - Developers (create PR)
      - Admins (approve PR)
-3. [Curent GitOps repository](https://github.com/IBMMQAutomation/mq-pipeline.git) for ArgoCD
+3. Curent GitOps [repository](https://github.com/IBMMQAutomation/mq-pipeline.git) for ArgoCD
    - Access: Admins only
 
 ## CI/CD Setup
