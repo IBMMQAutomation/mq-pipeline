@@ -22,7 +22,7 @@ We have three repositories for MQ pipeline:
 
 0. [Prerequisites](#prerequisites)
 1. [Build MQ base image](#MQ-Base-Image)
-   - Create Tekton pipeline to build, scan and push custom base image to your nexus/ocp/private registry (In this demo, we will build and push an image to openshift registry however you can change those tekton tasks to add scan and push to your private registry)
+   - Create Tekton pipeline to build, scan and push custom base image to your nexus/ocp/private registry (In this demo, we will build and push an image to openshift registry however you can add scan and push to your private registry to your tekton tasks and pipeline)
 2. [Dynamic MQSC](#Dynamic-MQSC-Tekton-Task)
    - Create Tekton pipeline to push MQSC changes from Dynamic MQSC repo to ArgoCD repo
 3. [Gitops setup](#GitOps-with-ArgoCD)
@@ -95,7 +95,7 @@ Already have an Openshift cluster with the following operators:
   ```
 
 - Apply Tekton pipeline and tasks to build and push custom image
-  - Note: You can easily add scan task to scan base image before pushing the base image to your nexus/private registry
+  - Note: In this demo, we will build and push an image to openshift registry however you can add scan and push to your private registry to your tekton tasks and pipeline
     ```
     cd base-iamge
     oc apply -f tekton/pipeline
