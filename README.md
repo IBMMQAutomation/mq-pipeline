@@ -1,9 +1,9 @@
 ## Overview
 
-<img src="/readme-images/custom-image.png" width="25%" height="10%">
-<img src="/readme-images/dynamic-mqsc-pipeline.png" width="25%" height="10%">
-<img src="/readme-images/argocd-app.png" width="25%" height="10%">
-<img src="/readme-images/different-envs.png" width="25%" height="10%">
+<img src="/readme-images/custom-image.png" width="45%" height="10%">
+<img src="/readme-images/dynamic-mqsc-pipeline.png" width="45%" height="10%">
+<img src="/readme-images/argocd-app.png" width="45%" height="10%">
+<img src="/readme-images/different-envs.png" width="45%" height="10%">
 
 ## Git Repository Setup
 
