@@ -1,12 +1,9 @@
 ## Overview
 
-![Custom Image Pipeline](/readme-images/custom-image.png){height="10%" width="25%"}
-
-![Dynamic MQSC Pipeline](/readme-images/dynamic-mqsc-pipeline.png){:height="10%" width="25%"}
-
-![ArgoCD deployment](/readme-images/argocd-app.png){:height="10%" width="25%"}
-
-![different-envs](/readme-images/different-envs.png){:height="10%" width="25%"}
+<img src="/readme-images/custom-image.png" width="25%" height="10%">
+<img src="/readme-images/dynamic-mqsc-pipeline.png" width="25%" height="10%">
+<img src="/readme-images/argocd-app.png" width="25%" height="10%">
+<img src="/readme-images/different-envs.png" width="25%" height="10%">
 
 ## Git Repository Setup
 
