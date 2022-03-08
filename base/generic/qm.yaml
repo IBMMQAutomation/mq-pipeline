@@ -26,6 +26,9 @@ spec:
     pod:
       containers:
         - name: qmgr
+          envFrom:
+            - secretRef:
+                name: mqsc-envs
           volumeMounts:
             - name: config-volume-scripts
               mountPath: /mq-config
