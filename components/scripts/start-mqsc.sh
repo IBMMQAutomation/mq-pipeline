@@ -12,7 +12,7 @@ while true; do
    then
       cksum=$tmpCksum
       echo "Applying MQSC"
-      runmqsc $1 < /dyn-mq-config-mqsc/dynamic.mqsc
+      eval "echo \"$(cat /dyn-mq-config-mqsc/dynamic.mqsc)\"" | runmqsc
    else
       sleep 3
    fi
