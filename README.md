@@ -61,7 +61,7 @@ Already have an Openshift cluster with the following operators:
     metadata:
     name: gitsecret
     annotations:
-        build.openshift.io/source-secret-match-uri-1: https://github.ibm.com #change this to yor enterprise github or use simply use https://github.com for public github repo
+        build.openshift.io/source-secret-match-uri-1: https://github.ibm.com #change this to your enterprise github or use simply use https://github.com for public github repo
     type: kubernetes.io/basic-auth
     stringData:
     username: yourid@ibm.com
