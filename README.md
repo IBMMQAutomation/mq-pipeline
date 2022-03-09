@@ -59,7 +59,7 @@ Already have an Openshift cluster with the following operators:
     apiVersion: v1
     kind: Secret
     metadata:
-      name: gitsecret
+      name: git-credentials
     annotations:
         #change this to your enterprise github or use simply use https://github.com for public github repo
         build.openshift.io/source-secret-match-uri-1: https://github.ibm.com
