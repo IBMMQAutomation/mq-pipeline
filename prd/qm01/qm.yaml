@@ -9,12 +9,3 @@ spec:
     use: Production
   queueManager:
     name: PRDQM01
-    mqsc:
-      - configMap:
-          name: qm01-mqsc-configmap
-          items:
-            # - static-generic.mqsc
-            # - static-qm.mqsc
-            - static-qm-prd.mqsc
-  web:
-    enabled: false
