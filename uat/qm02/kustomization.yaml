@@ -15,7 +15,7 @@ patches:
     patch: |-
       - op: replace
         path: /metadata/name
-        value: uatqm011
+        value: qm
 
 generatorOptions:
  disableNameSuffixHash: true
