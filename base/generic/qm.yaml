@@ -41,6 +41,7 @@ spec:
     pod:
       containers:
         - name: qmgr
+          command: ["eval "echo \"$(cat /etc/mqm/static-qm.mqsc)\"" | runmqsc"]
           envFrom:
             - secretRef:
                 name: mqsc-envs
