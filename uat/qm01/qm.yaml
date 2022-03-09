@@ -4,7 +4,7 @@ metadata:
   name: generic-qm
 spec:
   queueManager:
-    name: SENDER-UAT
+    name: SENDER_UAT
     mqsc:
       - configMap:
           name: sender-uat-static-mqsc-configmap
