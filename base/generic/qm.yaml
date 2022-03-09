@@ -19,9 +19,24 @@ spec:
       requests:
         cpu: 500m
         memory: 1Gi
+    availability:
+      type: NativeHA
     storage:
+      defaultClass: ibmc-block-gold
+      persistedData:
+        class: ibmc-block-gold
+        deleteClaim: true
+        enabled: true
+        type: persistent-claim
       queueManager:
-        type: ephemeral
+        class: ibmc-block-gold
+        deleteClaim: true
+        type: persistent-claim
+      recoveryLogs:
+        class: ibmc-block-gold
+        deleteClaim: true
+        enabled: true
+        type: persistent-claim
   template:
     pod:
       containers:
