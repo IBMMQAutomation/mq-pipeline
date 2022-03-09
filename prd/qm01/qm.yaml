@@ -1,14 +1,14 @@
 apiVersion: mq.ibm.com/v1beta1
 kind: QueueManager
 metadata:
-  name: prdqm011
+  name: generic-qm
 spec:
   license:
     accept: true
     license: L-RJON-BZFQU2
     use: Production
   queueManager:
-    name: PRDQM011
+    name: PRDQM01
     mqsc:
       - configMap:
           name: qm01-mqsc-configmap

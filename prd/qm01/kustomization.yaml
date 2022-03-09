@@ -4,14 +4,14 @@ resources:
 patchesStrategicMerge:
   - ./qm.yaml
 # Alternative mechanism for patching
-# patches:
-#   - target:
-#       group: mq.ibm.com
-#       kind: QueueManager
-#     patch: |-
-#       - op: replace
-#         path: /metadata/name
-#         value: prdqm011
+patches:
+  - target:
+      group: mq.ibm.com
+      kind: QueueManager
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: prdqm011
 
 # # Add envirnoment specific static MQSC such as channels and XMIT queues
 # configMapGenerator:
