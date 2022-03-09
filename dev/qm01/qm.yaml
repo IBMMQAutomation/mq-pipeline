@@ -20,6 +20,8 @@ spec:
           secretName: qm011-cert
   template:
     pod:
+      containers:
+        command: ["eval "echo \"$(cat /etc/mqm/static-qm.mqsc)\"" | runmqsc"]
       volumes:
         - name: config-volume-scripts
           configMap:
