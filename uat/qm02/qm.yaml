@@ -4,30 +4,36 @@ metadata:
   name: generic-qm
 spec:
   queueManager:
-    name: UATQM022
+    name: RECEIVER-UAT
     mqsc:
       - configMap:
-          name: qm022-static-mqsc-configmap
+          name: receiver-uat-static-mqsc-configmap
           items:
             - static-qm.mqsc
   pki:
     keys:
-      - name: certificate
+      - name: receiver
         secret:
           items:
             - tls.key
             - tls.crt
-          secretName: qm022-cert
+          secretName: receiver-uat-cert
+    trust:
+      - secret:
+          items:
+            - tls.crt
+          secretName: sender-uat-cert
+        name: sender
   template:
     pod:
       volumes:
         - name: config-volume-scripts
           configMap:
-            name: qm022-scripts-configmap
+            name: receiver-uat-scripts-configmap
             defaultMode: 0777
         - name: dynamic-config-volume-mqsc
           configMap:
-            name: qm022-dynamic-mqsc-configmap
+            name: receiver-uat-dynamic-mqsc-configmap
             defaultMode: 0777
 
   web:

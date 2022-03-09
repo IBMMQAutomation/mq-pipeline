@@ -2,7 +2,7 @@ resources:
   - ../../base/generic
 
 # Add a prefix to all queue manager artefacts, use a different namespace for each instance of the same queue manager i.e. dev, prd.
-namePrefix: qm011-
+namePrefix: sender-uat-
 
 patchesStrategicMerge:
   - ./qm.yaml
