@@ -30,7 +30,10 @@ configMapGenerator:
   behavior: create
   files:
     - static-qm.mqsc
-
+- name: static-ini-configmap
+  behavior: create
+  files:
+    - qm.ini
 generatorOptions:
  disableNameSuffixHash: true
 secretGenerator:
