@@ -10,6 +10,11 @@ spec:
           name: sender-uat-static-mqsc-configmap
           items:
             - static-qm.mqsc
+    ini:
+      - configMap:
+          name: sender-uat-static-ini-configmap
+          items:
+            - qm.ini
   pki:
     keys:
       - name: sender
