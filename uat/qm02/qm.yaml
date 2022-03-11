@@ -5,11 +5,17 @@ metadata:
 spec:
   queueManager:
     name: RECEIVER_UAT
+    ini:
+      - configMap:
+          name: receiver-uat-static-ini-configmap
+          items:
+            - qm.ini
     mqsc:
       - configMap:
           name: receiver-uat-static-mqsc-configmap
           items:
             - static-qm.mqsc
+     
   pki:
     keys:
       - name: receiver
