@@ -5,9 +5,15 @@
 <img src="/readme-images/argocd-app.png" width="45%" height="10%">
 <img src="/readme-images/different-envs.png" width="45%" height="10%">
 
-**Description**: This repo has a specific folder structure. It has 5 different folder for 5 environments such as DEV, SIT, UAT, PTE, PRD. Each environment has different QM folders and each QM folder has OCP/MQ configuration files.
+**Description**: This Gitops repo has a specific folder structure. It has 5 different folder for 5 environments such as DEV, SIT, UAT, PTE, PRD. Each environment has different QM folders and each QM folder has OCP/MQ configuration files. Lets take UAT folder as an example, it has QM01 (queue manager name) and it contains the following:
 
-**Important Note**: All the dynamic.mqsc changes come from [Dynamic MQSC repo](https://github.com/IBMMQAutomation/dynamic-mqsc) that your developer has requested so do not make changes directly to your dynamic.mqsc files in this repo.
+- certs: contains MQ certificates
+- dynamic.mqsc: All the dynamic.mqsc changes come from [Dynamic MQSC](https://github.com/IBMMQAutomation/dynamic-mqsc) that your developer has pushed so do not make changes directly to your dynamic.mqsc files in this repo. Tekton pipeline takes mqsc files from "Dynamic MQSC" repo injects environment variables and pushes all the mqsc files for each QM into GitOps repo
+- kustomization.yaml: Used for deploying `resources` on OpenShift. It generates configMaps for dynamic.mqsc, static-qm.mqsc and qm.ini as well as a secret for mq certificates. It also contains patches for QM
+- qm.ini: One time deployment of INI file. It also has `namePrefix` and the prefix is used for all the resources
+- qm.yaml: YAML for creating a QM on Opensift which points to MQSC confimaps, secret and QM name. ALl these will have `namePrefix` from kustomization.yaml
+- route.yaml: SNI route for external connection. You can also use patches for route just like QM
+- static-qm.mqsc: One time MQSC deployment that can't be edited later
 
 ```
 uat
