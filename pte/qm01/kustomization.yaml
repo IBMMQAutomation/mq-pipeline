@@ -1,6 +1,6 @@
 resources:
   - ../../uat/qm01
-
+  - route.yaml
 # patchesStrategicMerge:
 #   - ./qm.yaml
 

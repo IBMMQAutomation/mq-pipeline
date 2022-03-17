@@ -34,6 +34,7 @@ configMapGenerator:
   behavior: create
   files:
     - qm.ini
+    
 generatorOptions:
  disableNameSuffixHash: true
 secretGenerator:

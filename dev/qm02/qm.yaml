@@ -10,6 +10,11 @@ spec:
           name: qm022-static-mqsc-configmap
           items:
             - static-qm.mqsc
+    ini:
+      - configMap:
+          name: qm022-static-ini-configmap
+          items:
+            - qm.ini
   pki:
     keys:
       - name: certificate

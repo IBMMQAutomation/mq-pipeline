@@ -1,5 +1,6 @@
 resources:
   - ../../base/generic
+  - route.yaml
 
 # Add a prefix to all queue manager artefacts, use a different namespace for each instance of the same queue manager i.e. dev, prd.
 namePrefix: qm011-
@@ -29,6 +30,10 @@ configMapGenerator:
   behavior: create
   files:
     - static-qm.mqsc
+- name: static-ini-configmap
+  behavior: create
+  files:
+    - qm.ini
 
 generatorOptions:
  disableNameSuffixHash: true

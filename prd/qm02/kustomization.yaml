@@ -1,5 +1,6 @@
 resources:
   - ../../pte/qm02
+  # - route.yaml # uncomment only if you want to change the SNI route
 
 # patchesStrategicMerge:
 #   - ./qm.yaml

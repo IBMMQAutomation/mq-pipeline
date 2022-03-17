@@ -5,9 +5,37 @@
 <img src="/readme-images/argocd-app.png" width="45%" height="10%">
 <img src="/readme-images/different-envs.png" width="45%" height="10%">
 
-## Git Repository Setup
+**Description**: This repo has a specific folder structure. It has 5 different folder for 5 environments such as DEV, SIT, UAT, PTE, PRD. Each environment has different QM folders and each QM folder has OCP/MQ configuration files.
 
-We have three repositories for MQ pipeline:
+**Important Note**: All the dynamic.mqsc changes come from [Dynamic MQSC repo](https://github.com/IBMMQAutomation/dynamic-mqsc) that your developer has requested so do not make changes directly to your dynamic.mqsc files in this repo.
+
+```
+uat
+├── qm01
+│   ├── certs
+│   │   ├── tls.crt
+│   │   └── tls.key
+│   ├── dynamic.mqsc
+│   ├── kustomization.yaml
+│   ├── qm.ini
+│   ├── qm.yaml
+│   ├── route.yaml
+│   └── static-qm.mqsc
+└── qm02
+    ├── certs
+    │   ├── tls.crt
+    │   └── tls.key
+    ├── dynamic.mqsc
+    ├── kustomization.yaml
+    ├── qm.ini
+    ├── qm.yaml
+    ├── route.yaml
+    └── static-qm.mqsc
+```
+
+## Git Repositories
+
+We have three repositories for whole end to end pipeline:
 
 1. Base MQ image [repository](https://github.com/IBMMQAutomation/base-image) to build MQ custom base image for every MQ release/fix pack
    - Access: Admins only
@@ -16,7 +44,7 @@ We have three repositories for MQ pipeline:
      - Developers (create PR)
      - Admins (approve PR)
 3. Curent GitOps [repository](https://github.com/IBMMQAutomation/mq-pipeline.git) for ArgoCD
-   - Access: Admins only
+   - Access: Admins only (approve PR)
 
 # Steps
 

@@ -1,4 +1,4 @@
 resources:
-  - ./dev/qm02
+  # - ./dev/qm02
 # - ./prd/qm01
 # namePrefix: cluster-a-
