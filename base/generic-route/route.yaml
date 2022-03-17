@@ -1,13 +1,12 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: ext-conn-sitqm02-traffic
+  name: generic
 spec:
-  # EXT.CONN
-  host: ext2e-conn.chl.mq.ibm.com
+  host:
   to:
     kind: Service
-    name: sender-uat-qm-ibm-mq
+    name:
   port:
     targetPort: 1414
   tls:

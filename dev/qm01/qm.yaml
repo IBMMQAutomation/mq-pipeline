@@ -25,6 +25,11 @@ spec:
           secretName: qm011-cert
   template:
     pod:
+      containers:
+        - name: qmgr
+          envFrom:
+            - secretRef:
+                name: mqsc-envs
       volumes:
         - name: config-volume-scripts
           configMap:

@@ -1,6 +1,6 @@
 resources:
   - ../../uat/qm01
-  - route.yaml
+  - ../../base/generic-route
 # patchesStrategicMerge:
 #   - ./qm.yaml
 
@@ -13,10 +13,33 @@ patches:
       - op: replace
         path: /metadata/name
         value: pteqm011
+  # patches for SNI route
+  - target:
+      group: route.openshift.io
+      kind: Route
+    patch:
+      |- # make sure your server connection channel has a unqiue name across all the namespaces (EXT.CONN.PTEQM011) because value of the host has to be unique across all the namespaces
+      - op: replace
+        path: /spec/host
+        value: ext2e-conn2e-pteqm011.chl.mq.ibm.com
+  - target:
+      group: route.openshift.io
+      kind: Route
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: ext-conn-pteqm011-sni
+  - target:
+      group: route.openshift.io
+      kind: Route
+    patch: |- # make sure you add namePrefix in the value below
+      - op: replace
+        path: /spec/to/name
+        value: qm011-pteqm011-ibm-mq
 
 # # Add envirnoment specific static MQSC such as channels and XMIT queues
 # configMapGenerator:
 #   - name: mqsc-configmap
 #     behavior: merge
 #     files:
-#       - static-qm-prd.mqsc
+#       - static-qm-pte.mqsc

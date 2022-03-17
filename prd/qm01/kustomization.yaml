@@ -1,6 +1,5 @@
 resources:
   - ../../pte/qm01
-  # - route.yaml # uncomment only if you want to change the SNI route
 
 patchesStrategicMerge:
   - ./qm.yaml
@@ -13,6 +12,29 @@ patches:
       - op: replace
         path: /metadata/name
         value: prdqm011
+  # patches for SNI route
+  - target:
+      group: route.openshift.io
+      kind: Route
+    patch:
+      |- # make sure your server connection channel has a unqiue name across all the namespaces (EXT.CONN.PRDQM011) because value of the host has to be unique across all the namespaces
+      - op: replace
+        path: /spec/host
+        value: ext2e-conn2e-prdqm011.chl.mq.ibm.com
+  - target:
+      group: route.openshift.io
+      kind: Route
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: ext-conn-prdqm011-sni
+  - target:
+      group: route.openshift.io
+      kind: Route
+    patch: |- # make sure you add namePrefix in the value below
+      - op: replace
+        path: /spec/to/name
+        value: qm011-prdqm011-ibm-mq
 
 # # Add envirnoment specific static MQSC such as channels and XMIT queues
 # configMapGenerator:

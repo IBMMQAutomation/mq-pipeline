@@ -1,4 +1,4 @@
+# resources to deploy
 resources:
   # - ./dev/qm02
 # - ./prd/qm01
-# namePrefix: cluster-a-

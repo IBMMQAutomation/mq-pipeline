@@ -1,8 +1,9 @@
 resources:
   - ../../base/generic
-  - route.yaml
+  # - ../../base/generic-route # uncomment this for SNI route
 
 # Add a prefix to all queue manager artefacts, use a different namespace for each instance of the same queue manager i.e. dev, prd.
+# adds prefix to all the field with "-name" and patches with "metadata/name"
 namePrefix: receiver-uat-
 
 patchesStrategicMerge:
@@ -16,11 +17,43 @@ patches:
     patch: |-
       - op: replace
         path: /metadata/name
-        value: qm
+        value: qm022
+# Example of changing the name of the actual QM 
+  # - target:
+  #     group: mq.ibm.com
+  #     kind: QueueManager
+  #   patch: |-
+  #     - op: replace
+  #       path: /spec/queueManager/name
+  #       value: UAT_RECEIVER
+#
+# patches for SNI route
+  - target:
+      group: route.openshift.io
+      kind: Route
+    patch: |- # make sure your server connection channel has a unqiue name across all the namespaces (RECEIVER.UAT.EXT.CONN) because value of the host has to be unique across all the namespaces
+      - op: replace
+        path: /spec/host
+        value: receiver2e-uat2e-ext2e-conn.chl.mq.ibm.com
+  - target:
+      group: route.openshift.io
+      kind: Route
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: ext-conn-receiver-uat-sni
+  - target: 
+      group: route.openshift.io
+      kind: Route 
+    patch: |- # make sure you add namePrefix in the value below
+      - op: replace
+        path: /spec/to/name
+        value: receiver-uat-qm022-ibm-mq
 
+
+# configMap generator - it will create a configMap with "key" as names of your files such as dynamic.mqsc, qm.ini and static-qm.mqsc in below example with "values" as content of those files
 generatorOptions:
- disableNameSuffixHash: true
-# Create a configMap that will be used with a volume that is dynamically updated.
+  disableNameSuffixHash: true
 configMapGenerator:
 - name: dynamic-mqsc-configmap
   behavior: create
@@ -35,6 +68,7 @@ configMapGenerator:
   files:
     - qm.ini
 
+# secret generator - it will create a secret with "key" as names of your files such as tls.crt and tls.key in below example with "values" as content of those files
 generatorOptions:
  disableNameSuffixHash: true
 secretGenerator:
@@ -44,4 +78,3 @@ secretGenerator:
       - certs/tls.crt
       - certs/tls.key
     type: kubernetes.io/tls
-

@@ -12,8 +12,29 @@
 - kustomization.yaml: Used for deploying `resources` on OpenShift. It generates configMaps for dynamic.mqsc, static-qm.mqsc and qm.ini as well as a secret for mq certificates. It also contains patches for QM
 - qm.ini: One time deployment of INI file. It also has `namePrefix` and the prefix is used for all the resources
 - qm.yaml: YAML for creating a QM on Opensift which points to MQSC confimaps, secret and QM name. ALl these will have `namePrefix` from kustomization.yaml
-- route.yaml: SNI route for external connection. You can also use patches for route just like QM
 - static-qm.mqsc: One time MQSC deployment that can't be edited later
+
+**`base` folder**
+
+- generic/kustomization.yaml: It contains resources to deploy such as generic QM and components which will be used across all the QMs in all the enviornments. It has a script that keeps checking for changes in dynamic MQSC configmaps and applies those changes if there is a change.
+- generic/qm.yaml: Contains generic values for QM. Rest of the environments and QueueManagers will patch to this generic base QM
+- generic-route/kustomize.yaml: It contains resources to deploy SNI route for external connection
+- generic-route/route.yaml: This is a template for route and will be used for patches in other environments
+
+**IMPORTANT**:
+
+- If you are using OpenShift secret to store LDAP password then make sure you have the following section in either `base/generic/qm.yaml` if the password is same across all the queue managers and all the enviornments. If LDAP password is different for each queue manager then add the following section for each environemnt in each queue manager patching. For example, open `dev/qm01/qm.yaml` to see how to add secret reference for each QueueManager per enviornment.
+- If LDAP passwords expires every year and you have to update the secret then the recommendation is to create a new secret with a new name and change the name of the secret in `base/generic/qm.yaml` or change patching for the QMs per ENV such as `dev/qm01/qm.yaml`
+
+```
+pod:
+  containers:
+        - name: qmgr
+          envFrom:
+            - secretRef:
+                name: <secert-name>
+
+```
 
 ```
 uat
@@ -37,6 +58,15 @@ uat
     ├── qm.yaml
     ├── route.yaml
     └── static-qm.mqsc
+
+
+base
+├── generic
+│   ├── kustomization.yaml
+│   └── qm.yaml
+└── generic-route
+    ├── kustomization.yaml
+    └── route.yaml
 ```
 
 ## Git Repositories
