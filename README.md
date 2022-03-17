@@ -63,7 +63,7 @@ Already have an Openshift cluster with the following operators:
 - MQ
 - Openshift Pipelines
 - Openshift Gitops
-- Secrets: `ibm-entitlement-key` and `git-credentials`
+- Secrets: `ibm-entitlement-key`
 
   - To create `ibm-entitlement-key`
 
@@ -73,32 +73,6 @@ Already have an Openshift cluster with the following operators:
     --docker-password= <entitlement-key> \
     --docker-server=cp.icr.io \
     --namespace=<namespace>
-    ```
-
-  - To create `git-credentials`
-
-    ```
-    touch git-credentials.yaml
-    ```
-
-    Add the following content to `git-credentials.yaml` after changing annotations, username and password
-
-    ```
-    apiVersion: v1
-    kind: Secret
-    metadata:
-      name: git-credentials
-    annotations:
-        #change this to your enterprise github or use simply use https://github.com for public github repo
-        build.openshift.io/source-secret-match-uri-1: https://github.ibm.com
-    type: kubernetes.io/basic-auth
-    stringData:
-      username: <email>@ibm.com
-      password: <token>
-    ```
-
-    ```
-    oc apply -f git-credentials.yaml
     ```
 
 ## MQ Base Image
