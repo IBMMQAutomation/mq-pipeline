@@ -1,0 +1,13 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: generic
+spec:
+  host:
+  to:
+    kind: Service
+    name:
+  port:
+    targetPort: 1414
+  tls:
+    termination: passthrough

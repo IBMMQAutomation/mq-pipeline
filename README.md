@@ -13,13 +13,12 @@
 - qm.ini: One time deployment of INI file. It also has `namePrefix` and the prefix is used for all the resources
 - qm.yaml: YAML for creating a QM on Opensift which points to MQSC confimaps, secret and QM name. ALl these will have `namePrefix` from kustomization.yaml
 - static-qm.mqsc: One time MQSC deployment that can't be edited later
+- route.yaml: SNI route for server connection channel
 
 **`base` folder**
 
 - generic/kustomization.yaml: It contains resources to deploy such as generic QM and components which will be used across all the QMs in all the enviornments. It has a script that keeps checking for changes in dynamic MQSC configmaps and applies those changes if there is a change.
 - generic/qm.yaml: Contains generic values for QM. Rest of the environments and QueueManagers will patch to this generic base QM
-- generic-route/kustomize.yaml: It contains resources to deploy SNI route for external connection
-- generic-route/route.yaml: This is a template for route and will be used for patches in other environments
 
 **IMPORTANT**:
 

@@ -1,7 +1,7 @@
 resources:
   - ../../base/generic
-  # - ../../base/generic-route # uncomment this for SNI route
-
+  # - route.yaml # uncomment this for SNI route
+  
 # Add a prefix to all queue manager artefacts, use a different namespace for each instance of the same queue manager i.e. dev, prd.
 # adds prefix to all the field with "-name" and patches with "metadata/name"
 namePrefix: qm022-
