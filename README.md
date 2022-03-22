@@ -109,6 +109,31 @@ Already have an Openshift cluster with the following operators:
     --docker-server=cp.icr.io \
     --namespace=<namespace>
     ```
+- Optional: Create MQ self signed certificates
+
+  - Make sure you have IBM MQ Development Toolkit
+    - [MacOS](https://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/messaging/mqdev/mactoolkit/)
+    - [Windows](https://www-945.ibm.com/support/fixcentral/swg/selectFixes?parent=ibm~WebSphere&product=ibm/WebSphere/WebSphere+MQ&release=9.1.5&platform=Windows+64-bit,+x86&function=fixId&fixids=9.1.5.0-IBM-MQC-Win64+&useReleaseAsTarget=true&includeSupersedes=0)
+    - [Linux](https://www-945.ibm.com/support/fixcentral/swg/selectFixes?parent=ibm~WebSphere&product=ibm/WebSphere/WebSphere+MQ&release=9.1.5&platform=Linux+64-bit,x86_64&function=fixId&fixids=9.1.5.0-IBM-MQC-UbuntuLinuxX64+&useReleaseAsTarget=true&includeSupersedes=0)
+  - Create an empty directory
+  - Create the `tls.key` and `tls.crt` files with the following command. 
+    ```
+    openssl req -newkey rsa:2048 -nodes -keyout tls.key -x509 -days 3650 -out tls.crt
+    ```
+
+    - As stated in the [Prerequisites](#prequisites) you will need to have the IBM MQ Client installed to your local machine as we need access to a few of the CLI commands. The key database `.kdb` file is used as the truststore for the client application. The following command creates the `clientkey.kdb` file.
+    ```
+    runmqakm -keydb -create -db clientkey.kdb -pw password -type cms -stash
+    ```
+
+    - Now we need to add the previously public keys to the key database with the following.
+    ```
+    runmqakm -cert -add -db clientkey.kdb -label mqservercert -file tls.crt -format ascii -stashed
+    ```
+  - Now, lets create Openshift secret from these files
+    ```
+    oc create secret tls mq-tls-secret --key="tls.key" --cert="tls.crt"
+    ```
 
 ## MQ Base Image
 
