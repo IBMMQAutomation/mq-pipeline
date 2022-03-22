@@ -121,7 +121,7 @@ Already have an Openshift cluster with the following operators:
     openssl req -newkey rsa:2048 -nodes -keyout tls.key -x509 -days 3650 -out tls.crt
     ```
 
-    - As stated in the [Prerequisites](#prequisites) you will need to have the IBM MQ Client installed to your local machine as we need access to a few of the CLI commands. The key database `.kdb` file is used as the truststore for the client application. The following command creates the `clientkey.kdb` file.
+    - As stated above you will need to have the IBM MQ Client installed to your local machine as we need access to a few of the CLI commands. The key database `.kdb` file is used as the truststore for the client application. The following command creates the `clientkey.kdb` file.
     ```
     runmqakm -keydb -create -db clientkey.kdb -pw password -type cms -stash
     ```
